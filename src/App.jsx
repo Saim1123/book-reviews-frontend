@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import BookDetails from "./components/BookDetails";
+import Footer from "./components/Footer";
 
 function App() {
   const location = useLocation();
@@ -12,7 +13,7 @@ function App() {
     return location.pathname === "/signup" || location.pathname === "/login";
   };
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       {!isSignupOrLogin() && <Header />}
       <main>
         <Routes>
@@ -22,6 +23,7 @@ function App() {
           <Route path="/book/:id" element={<BookDetails />} />
         </Routes>
       </main>
+      {!isSignupOrLogin() && <Footer />}
     </div>
   );
 }
