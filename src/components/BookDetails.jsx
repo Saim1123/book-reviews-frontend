@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 
 const BookDetails = () => {
   const { id } = useParams();
-  const [book, setBook] = useState({});
-
-  console.log(id);
+  const [book, setBook] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -15,16 +15,19 @@ const BookDetails = () => {
           `http://localhost:5000/api/v1/book/${id}`
         );
         setBook(response.data.data);
-        console.log(response.data.data);
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching book:", err.message);
+        setLoading(false);
       }
     };
 
     fetchBook();
   }, [id]);
 
-  console.log(book);
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">
