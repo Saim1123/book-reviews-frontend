@@ -11,24 +11,31 @@ const Book = ({ book }) => {
   };
 
   return (
-    <div
+    <article
       onClick={() => handleClick(book._id)}
-      className="bg-white p-3 rounded-lg shadow-md cursor-pointer transform transition duration-200 hover:scale-105"
+      className="overflow-hidden rounded-lg shadow cursor-pointer transition hover:shadow-lg"
     >
       <img
+        alt={book.name}
         src={book.img}
-        alt={book.title}
-        className="w-full h-48 object-cover rounded-t-lg"
+        className="h-56 w-full object-cover"
       />
-      <div className="p-4">
-        <h2 className="text-xl font-bold truncate">
+
+      <div className="bg-white p-4 sm:p-6">
+        <span className="block text-sm font-bold text-blue-500">
+          {book.rating}
+        </span>
+
+        <h3 className="mt-0.5 text-lg text-gray-900">
+          {" "}
           {truncate(book.title, 20)}
-        </h2>
-        <p className="text-gray-700">{book.author}</p>
-        <p className="text-gray-600 mt-2">{truncate(book.description, 100)}</p>
-        <p className="text-blue-600 mt-2">Rating: {book.rating}</p>
+        </h3>
+
+        <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+          {truncate(book.description, 100)}
+        </p>
       </div>
-    </div>
+    </article>
   );
 };
 
